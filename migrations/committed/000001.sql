@@ -2,6 +2,7 @@
 --! Hash: sha1:0b9d64dceaac782151a84fa40ab92bf759457c58
 
 -- Enter migration here
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 DROP TABLE IF EXISTS public.users CASCADE;
@@ -19,6 +20,16 @@ CREATE TABLE public.users (
     created_at             TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at             TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+CREATE INDEX users_username_index    ON public.users (username);
+CREATE INDEX users_first_name_index  ON public.users (first_name);
+CREATE INDEX users_last_name_index   ON public.users (last_name);
+CREATE INDEX users_email_index       ON public.users (email);
+CREATE INDEX users_is_staff_index    ON public.users (is_staff);
+CREATE INDEX users_is_active_index   ON public.users (is_active);
+CREATE INDEX users_last_login_index  ON public.users (last_login);
+CREATE INDEX users_date_joined_index ON public.users (date_joined);
+CREATE INDEX users_created_at_index  ON public.users (created_at);
+CREATE INDEX users_updated_at_index  ON public.users (updated_at);
 
 CREATE OR REPLACE FUNCTION create_user(
     username               VARCHAR(100),
@@ -52,3 +63,13 @@ AS $$
     )
     RETURNING id;
 $$;
+
+DROP TABLE IF EXISTS public.sessions CASCADE;
+CREATE TABLE public.sessions(
+    id            UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
+    user_id       INTEGER NOT NULL,
+    expires       TIMESTAMP WITH TIME ZONE DEFAULT (CURRENT_TIMESTAMP + '2days'::interval),
+
+    CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES public.users (id) ON DELETE CASCADE
+);
+CREATE INDEX sessions_user_id_index ON public.sessions (user_id);

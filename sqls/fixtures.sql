@@ -2,7 +2,7 @@
 
 SET client_min_messages TO WARNING;
 
-TRUNCATE public.users;
+TRUNCATE public.users CASCADE;
 
 SELECT create_user(
     username   => 'john-doe1',

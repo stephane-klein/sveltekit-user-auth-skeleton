@@ -31,7 +31,8 @@ CREATE INDEX users_date_joined_index ON public.users (date_joined);
 CREATE INDEX users_created_at_index  ON public.users (created_at);
 CREATE INDEX users_updated_at_index  ON public.users (updated_at);
 
-CREATE OR REPLACE FUNCTION create_user(
+DROP FUNCTION IF EXISTS public.create_user;
+CREATE FUNCTION public.create_user(
     username               VARCHAR(100),
     first_name             VARCHAR(150),
     last_name              VARCHAR(150),
@@ -73,3 +74,74 @@ CREATE TABLE public.sessions(
     CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES public.users (id) ON DELETE CASCADE
 );
 CREATE INDEX sessions_user_id_index ON public.sessions (user_id);
+
+CREATE OR REPLACE FUNCTION public.create_session(
+    input_user_id INTEGER
+) RETURNS UUID
+LANGUAGE SQL
+AS $$
+    DELETE FROM public.sessions WHERE user_id = input_user_id;
+    INSERT INTO public.sessions (user_id) VALUES (input_user_id) RETURNING sessions.id;
+$$;;
+
+DROP FUNCTION IF EXISTS public.authenticate;
+CREATE FUNCTION public.authenticate(
+    input_username VARCHAR(100),
+    input_email    VARCHAR(360),
+    input_password VARCHAR(255)
+) RETURNS JSON
+LANGUAGE 'plpgsql'
+AS $$
+DECLARE
+    response JSON;
+BEGIN
+    WITH user_authenticated AS (
+        SELECT
+            id,
+            username,
+            first_name,
+            last_name,
+            email,
+            password,
+            is_staff,
+            is_active
+        FROM
+            public.users
+        WHERE
+            (
+                (username = input_username) AND
+                (password = crypt(input_password, password))
+            ) OR
+            (
+                (email = input_email) AND
+                (password = crypt(input_password, password))
+            )
+        LIMIT 1
+    )
+    SELECT json_build_object(
+        'statusCode', CASE WHEN (SELECT COUNT(*) FROM user_authenticated) > 0 THEN 200 ELSE 401 END,
+        'status', CASE WHEN (SELECT COUNT(*) FROM user_authenticated) > 0
+            THEN 'Login successful.'
+            ELSE 'Invalid username/password combination.'
+        END,
+        'user', CASE WHEN (SELECT COUNT(*) FROM user_authenticated) > 0
+            THEN (
+                SELECT
+                    json_build_object(
+                        'username',   user_authenticated.username,
+                        'first_name', user_authenticated.first_name,
+                        'last_name',  user_authenticated.last_name,
+                        'email',      user_authenticated.email,
+                        'password',   user_authenticated.password,
+                        'is_staff',   user_authenticated.is_staff
+                    )
+                FROM
+                    user_authenticated
+            )
+            ELSE NULL
+	    END,
+	    'sessionId', (SELECT create_session(user_authenticated.id) FROM user_authenticated)
+    ) INTO response;
+    RETURN response;
+END;
+$$;

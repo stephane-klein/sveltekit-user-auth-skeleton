@@ -9,3 +9,9 @@
         <li>{user.id} - {user.username}</li>
     {/each}
 </ul>
+
+<hr />
+
+{#if data?.user}
+    {data?.user?.first_name} {data?.user?.last_name}
+{/if}

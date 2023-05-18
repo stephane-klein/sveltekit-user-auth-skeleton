@@ -30,6 +30,15 @@ $ pnpm run dev
 
 Go to http://localhost:5173/
 
+## Valid logins
+
+- email: `john.doe1@example.com`
+  password: `secret1`
+- email: `john.doe2@example.com`
+  password: `secret2`
+- email: `john.doe3@example.com`
+  password: `secret3`
+
 ## Database migration
 
 ```

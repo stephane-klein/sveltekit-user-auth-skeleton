@@ -4,31 +4,36 @@ export async function handle({ event, resolve }) {
     const sessionId = event.cookies.get("session");
 
     if (sessionId) {
-        const { rows } = await db.query(
-            `
-                SELECT
-                    users.id,
-                    users.username,
-                    users.first_name,
-                    users.last_name,
-                    users.email,
-                    users.is_staff,
-                    users.is_active,
-                    users.last_login,
-                    users.date_joined,
-                    users.created_at,
-                    users.updated_at
-                FROM
-                    public.sessions
-                INNER JOIN public.users
-                    ON sessions.user_id = users.id
-                WHERE
-                    sessions.id=$1
-            `,
-            [sessionId]
-        );
-        if (rows?.length > 0) {
-            event.locals.user = rows[0];
+        console.log(sessionId);
+        try {
+            const { rows } = await db.query(
+                `
+                    SELECT
+                        users.id,
+                        users.username,
+                        users.first_name,
+                        users.last_name,
+                        users.email,
+                        users.is_staff,
+                        users.is_active,
+                        users.last_login,
+                        users.date_joined,
+                        users.created_at,
+                        users.updated_at
+                    FROM
+                        public.sessions
+                    INNER JOIN public.users
+                        ON sessions.user_id = users.id
+                    WHERE
+                        sessions.id=$1
+                `,
+                [sessionId]
+            );
+            if (rows?.length > 0) {
+                event.locals.user = rows[0];
+            }
+        } catch (e) {
+            console.log(e);
         }
     }
     if (!event.locals.user) event.cookies.delete("session");

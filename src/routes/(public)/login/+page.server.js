@@ -1,4 +1,4 @@
-import { redirect } from "@sveltejs/kit";
+import { redirect, fail } from "@sveltejs/kit";
 import db from "../../../db";
 
 export const actions = {
@@ -17,11 +17,18 @@ export const actions = {
                 data.get("password")
             ]
         );
-        console.log("res");
-        console.log(res?.rows);
-        console.log(res?.rows[0]);
-        console.log(res?.rows[0].authenticate?.sessionId);
-        cookies.set("session", res?.rows[0].authenticate?.sessionId, { path: "/" });
-        throw redirect(302, "/");
+        if (res?.rows[0].authenticate?.sessionId !== null) {
+            cookies.set("session", res?.rows[0].authenticate?.sessionId, { path: "/" });
+            throw redirect(302, "/");
+        } else {
+            cookies.delete("session");
+            return fail(
+                400,
+                {
+                    email: data.get("email"),
+                    error: res?.rows[0].authenticate.status
+                }
+            );
+        }
     }
 };

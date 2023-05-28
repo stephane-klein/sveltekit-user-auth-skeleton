@@ -1,5 +1,5 @@
 --! Previous: -
---! Hash: sha1:0b9d64dceaac782151a84fa40ab92bf759457c58
+--! Hash: sha1:994d3e7b0284fcd2cdde1846e2e57ded45e12ff0
 
 -- Enter migration here
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
@@ -109,13 +109,16 @@ BEGIN
             public.users
         WHERE
             (
-                (username = input_username) AND
-                (password = crypt(input_password, password))
-            ) OR
-            (
-                (email = input_email) AND
-                (password = crypt(input_password, password))
-            )
+                (
+                    (username = input_username) AND
+                    (password = crypt(input_password, password))
+                ) OR
+                (
+                    (email = input_email) AND
+                    (password = crypt(input_password, password))
+                )
+            ) AND
+            (is_active IS true)
         LIMIT 1
     )
     SELECT json_build_object(

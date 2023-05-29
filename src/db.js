@@ -8,5 +8,6 @@ const pool = new Pool({
     password: process.env.POSTGRES_PASSWORD || "password",
     port: process.env.POSTGRES_PORT || 5432
 });
+const client = await pool.connect();
 
-export default pool;
+export default client;

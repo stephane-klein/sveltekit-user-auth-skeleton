@@ -39,6 +39,12 @@ Go to http://localhost:5173/
 - email: `john.doe3@example.com`
   password: `secret3`
 
+Create new user with:
+
+```
+$ pnpm run user create --email=john.doe4@example.com --username=john-doe4 --password=password --firstname=John --lastname=Doe
+```
+
 ## Database migration
 
 ```

@@ -3,11 +3,8 @@ set -e
 
 cd "$(dirname "$0")/../"
 
-docker compose up -d --wait
-cat << EOF | docker compose exec -T postgres sh -c "psql --quiet -U \$POSTGRES_USER \$POSTGRES_DB"
-    CREATE DATABASE myapp WITH OWNER postgres;
-    CREATE DATABASE myapp WITH OWNER postgres;
-EOF
-
+docker compose up -d postgres postgres-test --wait
 pnpm run migrate:reset --erase
-pnpm run migrate:status
+pnpm run migrate-test:reset --erase
+
+docker compose exec postgres-test sh -c "cd /sqls/ && psql --quiet -U \$POSTGRES_USER myapp -f /sqls/pgtap.sql" > /dev/null

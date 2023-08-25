@@ -56,6 +56,16 @@ Apply migration in `migrations/current.sql` and commit:
 $ pnpm run migrate:commit
 ```
 
+## Execute pgTAG (PostgreSQL tests)
+
+```sh
+$ pnpm run migrate-test:watch
+```
+
+```sh
+$ ./scritps/tests.sh
+```
+
 ## Prettier
 
 Launch Prettier check:

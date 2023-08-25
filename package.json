@@ -9,12 +9,16 @@
 		"prettier-check": "prettier --check src/",
 		"prettier": "prettier -w",
 		"eslint": "eslint . --max-warnings=0",
-		"migrate:init": "graphile-migrate init",
 		"migrate:reset": "graphile-migrate reset",
 		"migrate:status": "graphile-migrate status",
 		"migrate:migrate": "graphile-migrate migrate",
 		"migrate:commit": "graphile-migrate commit",
 		"migrate:watch": "graphile-migrate watch",
+		"migrate-test:reset": "graphile-migrate --config=.gmrc-test reset --erase",
+		"migrate-test:status": "graphile-migrate --config=.gmrc-test status",
+		"migrate-test:migrate": "graphile-migrate --config=.gmrc-test migrate",
+		"migrate-test:commit": "graphile-migrate --config=.gmrc-test commit",
+		"migrate-test:watch": "graphile-migrate --config=.gmrc-test watch",
 		"user": "node src/cli.js user"
 	},
 	"devDependencies": {

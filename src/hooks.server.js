@@ -21,8 +21,8 @@ export async function handle({ event, resolve }) {
                         users.created_at,
                         users.updated_at
                     FROM
-                        public.sessions
-                    INNER JOIN public.users
+                        auth.sessions
+                    INNER JOIN auth.users
                         ON sessions.user_id = users.id
                     WHERE
                         sessions.id=$1

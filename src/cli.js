@@ -39,7 +39,7 @@ await yargs(hideBin(process.argv))
                 try {
                     await db.query(
                         `
-                                    SELECT create_user(
+                                    SELECT auth.create_user(
                                         username   => $1,
                                         first_name => $2,
                                         last_name  => $3,

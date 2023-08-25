@@ -6,7 +6,7 @@ export const actions = {
         const data = await request.formData();
         const res = await db.query(
             `
-                SELECT public.authenticate(
+                SELECT auth.authenticate(
                     input_username=>'',
                     input_email=>$1,
                     input_password=>$2

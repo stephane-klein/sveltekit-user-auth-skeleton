@@ -2,9 +2,9 @@
 
 SET client_min_messages TO WARNING;
 
-TRUNCATE public.users CASCADE;
+TRUNCATE auth.users CASCADE;
 
-SELECT create_user(
+SELECT auth.create_user(
     username   => 'john-doe1',
     first_name => 'John',
     last_name  => 'Doe1',
@@ -14,7 +14,7 @@ SELECT create_user(
     is_active  => true
 );
 
-SELECT create_user(
+SELECT auth.create_user(
     username   => 'john-doe2',
     first_name => 'John',
     last_name  => 'Doe2',
@@ -24,7 +24,7 @@ SELECT create_user(
     is_active  => true
 );
 
-SELECT create_user(
+SELECT auth.create_user(
     username   => 'john-doe3',
     first_name => 'John',
     last_name  => 'Doe3',

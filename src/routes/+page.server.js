@@ -8,7 +8,7 @@ export async function load() {
                     SELECT
                         users.id AS id,
                         users.username AS username
-                    FROM public.users
+                    FROM auth.users
                 `
             )
         ).rows

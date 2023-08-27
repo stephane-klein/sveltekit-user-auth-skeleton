@@ -18,15 +18,12 @@ services:
       start_period: 30s
 
   postgres-test:
-    image: stephaneklein/postgres-pgtap:15
-    build:
-      context: .
-      dockerfile: Dockerfile.postgres-test
+    image: postgres:15
     environment:
       POSTGRES_USER: postgrestest
       POSTGRES_DB: postgrestest
       POSTGRES_PASSWORD: passwordtest
-      PGOPTIONS: "--search_path=tap"
+      PGOPTIONS: "--search_path=''"
     ports:
       - 5433:5432
     volumes:

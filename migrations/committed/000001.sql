@@ -1,8 +1,7 @@
 --! Previous: -
---! Hash: sha1:b68d3d5626fee3e5b7e0110e6ab231cf457d5a9c
+--! Hash: sha1:e79c086ea21749f6e7c0058e7884375243e0ad4e
 
 -- Enter migration here
-
 DROP SCHEMA IF EXISTS public CASCADE;
 DROP SCHEMA IF EXISTS auth CASCADE;
 
@@ -130,7 +129,7 @@ BEGIN
         LIMIT 1
     )
     SELECT json_build_object(
-        'statusCode', CASE WHEN (SELECT COUNT(*) FROM user_authenticated) > 0 THEN 200 ELSE 401 END,
+        'status_code', CASE WHEN (SELECT COUNT(*) FROM user_authenticated) > 0 THEN 200 ELSE 401 END,
         'status', CASE WHEN (SELECT COUNT(*) FROM user_authenticated) > 0
             THEN 'Login successful.'
             ELSE 'Invalid username/password combination.'
@@ -151,7 +150,7 @@ BEGIN
             )
             ELSE NULL
 	    END,
-	    'sessionId', (SELECT auth.create_session(user_authenticated.id) FROM user_authenticated)
+	    'session_id', (SELECT auth.create_session(user_authenticated.id) FROM user_authenticated)
     ) INTO response;
     RETURN response;
 END;

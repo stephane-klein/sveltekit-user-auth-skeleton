@@ -4,7 +4,6 @@ export async function handle({ event, resolve }) {
     const sessionId = event.cookies.get("session");
 
     if (sessionId) {
-        console.log(sessionId);
         try {
             const rows = await sql`
                 SELECT

@@ -11,8 +11,8 @@ export const actions = {
                 input_password=>${data.get("password")}
             )
         `)[0]?.authenticate;
-        if (authenticateResult.sessionId !== null) {
-            cookies.set("session", authenticateResult?.sessionId, { path: "/" });
+        if (authenticateResult.session_id !== null) {
+            cookies.set("session", authenticateResult?.session_id, { path: "/" });
             throw redirect(302, "/");
         } else {
             cookies.delete("session");

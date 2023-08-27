@@ -6,7 +6,7 @@
 
 <ul>
     {#each data.users as user}
-        <li>{user.id} - {user.username}</li>
+        <li>{user.id} - {user.username} - {user.email}</li>
     {/each}
 </ul>
 

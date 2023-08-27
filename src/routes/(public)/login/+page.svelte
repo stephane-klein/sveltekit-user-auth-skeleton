@@ -14,4 +14,6 @@
     </div>
 
     <input type="submit" value="Login" />
+    |
+    <a href="../">back</a>
 </form>

@@ -56,14 +56,22 @@ Apply migration in `migrations/current.sql` and commit:
 $ pnpm run migrate:commit
 ```
 
-## Execute pgTAG (PostgreSQL tests)
+## Execute Unittest
 
-```sh
+```
 $ pnpm run migrate-test:watch
 ```
 
 ```sh
-$ ./scritps/tests.sh
+$ pnpm run -s tests
+ PASS  tests/auth.js
+  ✓ Create a user (39 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.255 s, estimated 1 s
+Ran all test suites.
 ```
 
 ## Prettier

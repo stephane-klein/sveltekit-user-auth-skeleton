@@ -19,7 +19,8 @@
 		"migrate-test:migrate": "graphile-migrate --config=.gmrc-test migrate",
 		"migrate-test:commit": "graphile-migrate --config=.gmrc-test commit",
 		"migrate-test:watch": "graphile-migrate --config=.gmrc-test watch",
-		"user": "node src/cli.js user"
+		"user": "node src/cli.js user",
+        "tests": "NODE_NO_WARNINGS=1 node --experimental-vm-modules node_modules/jest/bin/jest.js"
 	},
 	"devDependencies": {
 		"eslint": "8.47.0",
@@ -30,7 +31,8 @@
 		"eslint-plugin-promise": "6.1.1",
 		"eslint-plugin-unicorn": "48.0.1",
 		"prettier": "3.0.2",
-		"prettier-plugin-svelte": "3.0.3"
+		"prettier-plugin-svelte": "3.0.3",
+		"jest": "29.6.4"
 	},
 	"type": "module",
 	"dependencies": {

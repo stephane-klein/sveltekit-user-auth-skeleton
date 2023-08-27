@@ -4,11 +4,11 @@ let sql;
 
 beforeAll(() => {
     sql = postgres(
-        'postgres://postgrestest:passwordtest@localhost:5433/myapp'
+        "postgres://postgrestest:passwordtest@localhost:5433/myapp"
     );
 });
 afterAll(() => {
-    sql.end()
+    sql.end();
 });
 
 test("Create a user and login", async() => {

@@ -1,7 +1,7 @@
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 
-import db from "./db.js";
+import sql from "./db.js";
 
 await yargs(hideBin(process.argv))
     .command("user", "Manage users", (yargs) =>
@@ -35,26 +35,23 @@ await yargs(hideBin(process.argv))
                         default: false
                     }
                 }),
-            async (argv) => {
+            async(argv) => {
                 try {
-                    await db.query(
-                        `
-                                    SELECT auth.create_user(
-                                        username   => $1,
-                                        first_name => $2,
-                                        last_name  => $3,
-                                        email      => $4,
-                                        password   => $5,
-                                        is_staff   => $6,
-                                        is_active  => true
-                                    );
-                                `,
-                        [argv.username, argv?.firstname, argv?.lastname, argv.email, argv.password, argv.staff]
-                    );
+                    await sql`
+                        SELECT auth.create_user(
+                            username   => ${argv.username},
+                            first_name => ${argv?.firstname || ""},
+                            last_name  => ${argv?.lastname || ""},
+                            email      => ${argv.email},
+                            password   => ${argv.password},
+                            is_staff   => ${argv.staff},
+                            is_active  => true
+                        );
+                    `;
                 } catch (err) {
                     console.log(err.message);
                 } finally {
-                    db.end();
+                    sql.end();
                 }
             }
         )

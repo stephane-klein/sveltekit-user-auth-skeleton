@@ -21,4 +21,6 @@
     <a data-sveltekit-reload href="/logout/">Logout</a>
 {:else}
     <a data-sveltekit-reload href="/login/">Login</a>
+    |
+    <a data-sveltekit-reload href="/signup/">Signup</a>
 {/if}

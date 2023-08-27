@@ -3,7 +3,7 @@ import { hideBin } from "yargs/helpers";
 
 import sql from "./db.js";
 
-await yargs(hideBin(process.argv))
+yargs(hideBin(process.argv))
     .command("user", "Manage users", (yargs) =>
         yargs.command(
             "create",

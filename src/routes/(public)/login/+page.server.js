@@ -1,5 +1,5 @@
 import { redirect, fail } from "@sveltejs/kit";
-import sql from "../../../db";
+import sql from "$lib/server/db.js";
 
 export const actions = {
     default: async({ request, cookies }) => {

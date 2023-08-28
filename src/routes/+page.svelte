@@ -22,5 +22,7 @@
 {:else}
     <a data-sveltekit-reload href="/login/">Login</a>
     |
+    <a href="../password_reset/">Forget password?</a>
+    |
     <a data-sveltekit-reload href="/signup/">Signup</a>
 {/if}

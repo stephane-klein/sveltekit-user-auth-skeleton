@@ -15,5 +15,7 @@
 
     <input type="submit" value="Login" />
     |
+    <a href="../password_reset/">Forget password?</a>
+    |
     <a href="../">back</a>
 </form>

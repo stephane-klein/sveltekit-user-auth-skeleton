@@ -71,13 +71,15 @@ $$;
 
 DROP TABLE IF EXISTS auth.sessions CASCADE;
 CREATE TABLE auth.sessions(
-    id            UUID PRIMARY KEY DEFAULT utils.uuid_generate_v4() NOT NULL,
-    user_id       INTEGER NOT NULL,
-    expires       TIMESTAMP WITH TIME ZONE DEFAULT (CURRENT_TIMESTAMP + '2days'::interval),
+    id                  UUID PRIMARY KEY DEFAULT utils.uuid_generate_v4() NOT NULL,
+    user_id             INTEGER NOT NULL,
+    impersonate_user_id INTEGER DEFAULT NULL,
+    expires             TIMESTAMP WITH TIME ZONE DEFAULT (CURRENT_TIMESTAMP + '2days'::interval),
 
     CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES auth.users (id) ON DELETE CASCADE
 );
 CREATE INDEX sessions_user_id_index ON auth.sessions (user_id);
+CREATE INDEX sessions_impersonate_user_id_index ON auth.sessions (impersonate_user_id);
 
 CREATE OR REPLACE FUNCTION auth.create_session(
     input_user_id INTEGER

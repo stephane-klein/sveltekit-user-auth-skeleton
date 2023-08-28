@@ -33,3 +33,10 @@ services:
       test: ["CMD", "sh", "-c", "pg_isready -U $$POSTGRES_USER -h $$(hostname -i)"]
       interval: 10s
       start_period: 30s
+
+  maildev:
+    image: maildev/maildev:2.1.0
+    restart: always
+    ports:
+      - "1080:1080"
+      - "1025:1025"

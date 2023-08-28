@@ -44,6 +44,10 @@ Create new user with:
 $ pnpm run user create --email=john.doe4@example.com --username=john-doe4 --password=password --firstname=John --lastname=Doe
 ```
 
+## Maildev
+
+You can access to Maildev on http://localhost:1080
+
 ## Database migration
 
 ```

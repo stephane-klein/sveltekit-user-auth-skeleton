@@ -135,6 +135,7 @@ BEGIN
             THEN (
                 SELECT
                     json_build_object(
+                        'id',         user_authenticated.id,
                         'username',   user_authenticated.username,
                         'first_name', user_authenticated.first_name,
                         'last_name',  user_authenticated.last_name,
@@ -149,6 +150,44 @@ BEGIN
 	    END,
 	    'session_id', (SELECT auth.create_session(user_authenticated.id) FROM user_authenticated)
     ) INTO response;
+
+    IF ((response->>'status_code')::INTEGER = 200) THEN
+        UPDATE auth.users
+           SET last_login = NOW()
+         WHERE id=(response->'user'->>'id')::INTEGER;
+    END IF;
     RETURN response;
 END;
 $$;
+
+-- Load fixture
+
+SELECT auth.create_user(
+    username   => 'john-doe1',
+    first_name => 'John',
+    last_name  => 'Doe1',
+    email      => 'john.doe1@example.com',
+    password   => 'secret1',
+    is_staff   => true,
+    is_active  => true
+);
+
+SELECT auth.create_user(
+    username   => 'john-doe2',
+    first_name => 'John',
+    last_name  => 'Doe2',
+    email      => 'john.doe2@example.com',
+    password   => 'secret2',
+    is_staff   => false,
+    is_active  => true
+);
+
+SELECT auth.create_user(
+    username   => 'john-doe3',
+    first_name => 'John',
+    last_name  => 'Doe3',
+    email      => 'john.doe3@example.com',
+    password   => 'secret3',
+    is_staff   => false,
+    is_active  => false
+);

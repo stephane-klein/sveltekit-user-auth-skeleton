@@ -34,6 +34,10 @@
     <hr />
 
     <a data-sveltekit-reload href="/logout/">Logout</a>
+
+    |
+
+    <a href="/invitations/">Invitations</a>
 {:else}
     <a data-sveltekit-reload href="/login/">Login</a>
     |

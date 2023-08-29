@@ -162,6 +162,23 @@ BEGIN
 END;
 $$;
 
+DROP TABLE IF EXISTS auth.invitations CASCADE;
+CREATE TABLE auth.invitations (
+    id          SERIAL PRIMARY KEY,
+    invited_by  INTEGER DEFAULT NULL,
+    email       VARCHAR(360) DEFAULT NULL,
+    token       TEXT,
+    expires     TIMESTAMP WITH TIME ZONE DEFAULT (CURRENT_TIMESTAMP + '7days'::interval),
+    user_id     INTEGER DEFAULT NULL,
+
+    CONSTRAINT fk_invited_by FOREIGN KEY (invited_by) REFERENCES auth.users (id) ON DELETE CASCADE,
+    CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES auth.users (id) ON DELETE CASCADE
+);
+CREATE INDEX invitations_invited_by_index ON auth.invitations (invited_by);
+CREATE INDEX invitations_email_index ON auth.invitations (email);
+CREATE INDEX invitations_token_index ON auth.invitations (token);
+CREATE INDEX invitations_user_id_index ON auth.invitations (user_id);
+
 -- Load fixture
 
 SELECT auth.create_user(

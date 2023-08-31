@@ -18,8 +18,6 @@ export const actions = {
                 expiresIn: "7d"
             }
         );
-        console.log(token);
-        console.log(token.length);
 
         await sql`
             INSERT INTO auth.invitations ${

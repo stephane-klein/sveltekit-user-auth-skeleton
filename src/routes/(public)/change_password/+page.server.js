@@ -3,11 +3,11 @@ import sql from "$lib/server/db.js";
 import jwt from "jsonwebtoken";
 import mail from "$lib/server/mail.js";
 
-export async function load({ params }) {
+export async function load({ url }) {
     let decoded;
     try {
         decoded = jwt.verify(
-            params.token,
+            url.searchParams.get("token"),
             process.env.SECRET || "secret"
         );
     } catch(error) {
@@ -23,11 +23,11 @@ export async function load({ params }) {
 }
 
 export const actions = {
-    default: async({ request, params }) => {
+    default: async({ request, url }) => {
         let decoded;
         try {
             decoded = jwt.verify(
-                params.token,
+                url.searchParams.get("token"),
                 process.env.SECRET || "secret"
             );
         } catch(error) {

@@ -15,7 +15,9 @@ export const actions = {
                 { expiresIn: "30m" }
             );
 
-            const resetUrl = `${request.url}${token}/`;
+            const resetUrl = new URL(request.url);
+            resetUrl.pathname = "/change_password/";
+            resetUrl.searchParams.set("token", token);
 
             const info = await mail.sendMail({
                 from: "noreply@example.com",

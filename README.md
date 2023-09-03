@@ -1,5 +1,7 @@
 # SvelteKit SSR user auth skeleton
 
+I hope to use this skeleton as a foundation to integrate user authentication in SvelteKit web app.
+
 Repository starting point issue (in French): https://github.com/stephane-klein/backlog/issues/209
 
 This skeleton is build over [`sveltekit-ssr-skeleton`](https://github.com/stephane-klein/sveltekit-ssr-skeleton).

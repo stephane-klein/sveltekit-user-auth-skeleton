@@ -28,6 +28,7 @@ Components and libraries:
 - ✅ PostgreSQL database server
 - ✅ [Postgres.js](https://github.com/porsager/postgres) - PostgreSQL client for Node.js
 - ✅ Migration powered by [graphile-migrate](https://github.com/graphile/migrate)
+- ✅ Token generated with [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
 
 Tooling:
 

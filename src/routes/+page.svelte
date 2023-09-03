@@ -11,7 +11,7 @@
         <li>
             {user.id} - {user.username} - {user.email}
             {#if data?.user?.is_staff}
-                | <a href={`/impersonate/${user.id}/?redirect=${$page.url}`}>impersonate</a>
+                | <a href={`/impersonate/${user.username}/?redirect=${$page.url}`}>impersonate</a>
             {/if}
         </li>
     {/each}

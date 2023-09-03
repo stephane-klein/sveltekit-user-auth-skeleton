@@ -18,7 +18,6 @@ Opinions:
 
 - No ORM pattern
 - `impersonate_user_id` is stored in `auth.sessions` table (this can be challenged)
-- No REST API
 - I'm trying to move towards [Radical Simplicity](https://www.radicalsimpli.city/)
 - [Don’t Build A General Purpose API To Power Your Own Front End](https://max.engineer/server-informed-ui)
 

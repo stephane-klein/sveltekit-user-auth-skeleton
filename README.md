@@ -4,6 +4,36 @@ Repository starting point issue (in French): https://github.com/stephane-klein/b
 
 This skeleton is build over [`sveltekit-ssr-skeleton`](https://github.com/stephane-klein/sveltekit-ssr-skeleton).
 
+Features:
+
+- User login
+- User signup
+- User signup by invitation (enabled by `INVITATION_REQUIRED=1` variable env)
+- User password reset support
+- User impersonate support for staff user
+
+Opinions:
+
+- No ORM pattern
+- `impersonate_user_id` is stored in `auth.sessions` table (this can be challenged)
+- No REST API
+- I'm trying to move towards [Radical Simplicity](https://www.radicalsimpli.city/)
+- [Don’t Build A General Purpose API To Power Your Own Front End](https://max.engineer/server-informed-ui)
+
+Components and libraries:
+
+- ✅ [SSR](https://kit.svelte.dev/docs/page-options#ssr) [SvelteKit](https://github.com/sveltejs/kit) with [Hydration](https://kit.svelte.dev/docs/glossary#hydration)
+- ✅ PostgreSQL database server
+- ✅ [Postgres.js](https://github.com/porsager/postgres) - PostgreSQL client for Node.js
+- ✅ Migration powered by [graphile-migrate](https://github.com/graphile/migrate)
+
+Tooling:
+
+- ✅ [asdf](https://asdf-vm.com/)
+- ✅ [NodeJS](https://nodejs.org/en/)
+- ✅ [pnpm](https://pnpm.io/)
+- ✅ [Jest](https://jestjs.io/) for unittest
+
 ## Getting started
 
 ```sh

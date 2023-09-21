@@ -40,7 +40,7 @@ Tooling:
 
 ## Development time and costs
 
-The `2023-09-12`, until commit [`fb78f6d`](https://github.com/stephane-klein/sveltekit-user-auth-skeleton/commit/fb78f6d4598697d6325d6b642d27ead57ef8d5dc), I spent 15 hours and 28 minutes on this project.<br />
+The `2023-09-21`, until commit [`fb78f6d`](https://github.com/stephane-klein/sveltekit-user-auth-skeleton/commit/fb78f6d4598697d6325d6b642d27ead57ef8d5dc), I spent 15 hours and 28 minutes on this project.<br />
 This time was measured with a chronometer, which is deep work.<br />
 I consider that a "normal" working day corresponds to a maximum of 4 hours of deep work.
 

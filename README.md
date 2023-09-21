@@ -38,6 +38,36 @@ Tooling:
 - ✅ [pnpm](https://pnpm.io/)
 - ✅ [Jest](https://jestjs.io/) for unittest
 
+## Development time and costs
+
+I spent 15 hours and 28 minutes on this project.<br />
+This time was measured with a chronometer, which is deep work.<br />
+I consider that a "normal" working day corresponds to a maximum of 4 hours of deep work.
+
+This work would correspond to the following price:
+
+- For a French developer on a permanent contract at 65 K€ gross per year: 1748 € (total cost paid by the employer)
+- For a freelance developer at 600 € per day: 2400 € (total cost invoiced by the freelance)
+
+<details>
+  <summary>See details</summary>
+
+```sh
+$ python
+Python 3.11.5 (main, Aug 28 2023, 00:00:00) [GCC 13.2.1 20230728 (Red Hat 13.2.1-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import math
+>>> french_developer_on_a_permanent_contract = math.ceil(15.5/4) * 437
+>>> french_developer_on_a_permanent_contract
+1748
+>>> freelance = math.ceil(15.5/4) * 600
+>>> freelance
+2400
+>>>
+```
+
+</details>
+
 ## Getting started
 
 ```sh
